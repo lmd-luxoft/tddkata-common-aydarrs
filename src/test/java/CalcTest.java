@@ -38,8 +38,15 @@ public class CalcTest {
     }
 
     @Test
-    public void testFailSum() {
+    public void testFailNegativeNumberSum() {
         int actual = calc.sum("-3,2");
+        int expected = -1;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testFailNotNumberSum() {
+        int actual = calc.sum("It's a trap!,2");
         int expected = -1;
         assertEquals(expected, actual);
     }
