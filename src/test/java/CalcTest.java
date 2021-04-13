@@ -36,4 +36,11 @@ public class CalcTest {
         int expected = 3;
         assertEquals(expected, actual);
     }
+
+    @Test
+    public void testFailSum() {
+        int actual = calc.sum("-3,2");
+        int expected = -1;
+        assertEquals(expected, actual);
+    }
 }
