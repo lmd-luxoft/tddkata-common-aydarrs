@@ -1,6 +1,9 @@
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Random;
+import java.util.StringJoiner;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -56,5 +59,66 @@ public class CalcTest {
         int actual = calc.sum(null);
         int expected = -1;
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void testManyNumbersSum() {
+        Random random = new Random();
+        int count = random.nextInt();
+        String expression;
+        StringJoiner joiner = new StringJoiner("");
+        int sum = 0;
+
+        for (int i = 0; i < count; i++) {
+            sum++;
+        }
+
+        joiner.add(String.valueOf(sum));
+        expression = joiner.toString();
+
+        int result = calc.sum(expression);
+        assertEquals(result, sum);
+    }
+
+    @Test
+    public void testFailNegativeNumberManyNumbersSum() {
+        Random random = new Random();
+        int count = random.nextInt();
+        String expression;
+        StringJoiner joiner = new StringJoiner("");
+        int sum = 0;
+
+        for (int i = 0; i < count; i++) {
+            sum++;
+        }
+
+        joiner.add(String.valueOf(sum));
+        joiner.add("It's a trap");
+
+        expression = joiner.toString();
+
+        int result = calc.sum(expression);
+        assertEquals(result, -1);
+    }
+
+    @Test
+    public void testFailNotNumberManyNumbersSum() {
+        Random random = new Random();
+        int count = random.nextInt();
+        String expression;
+        StringJoiner joiner = new StringJoiner("");
+        int sum = 0;
+
+        for (int i = 0; i < count; i++) {
+            sum++;
+        }
+
+        joiner.add(String.valueOf(sum));
+        joiner.add("-1");
+
+        expression = joiner.toString();
+
+        int result = calc.sum(expression);
+        assertEquals(result, -1);
     }
 }
