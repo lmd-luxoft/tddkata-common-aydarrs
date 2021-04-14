@@ -1,3 +1,5 @@
+import com.sun.xml.internal.ws.util.StringUtils;
+
 /**
  * Calc.
  *
@@ -11,11 +13,18 @@ public class Calc {
 
         int result = 0;
         try {
-            if (expression.contains(",\n") || expression.contains("\n,")) {
-                return -1;
+
+            if (expression.startsWith("//")) {
+                String delimiter = String.valueOf(expression.charAt(2));
+                return parseWithSpecialDelimiter(result, expression.substring(4), delimiter);
+
+            } else {
+                if (expression.contains(",\n") || expression.contains("\n,")) {
+                    return -1;
+                }
+                String[] numbers = expression.split(",");
+                result = parse(result, numbers);
             }
-            String[] numbers = expression.split(",");
-            result = parse(result, numbers);
         } catch (Exception e) {
                 return -1;
         }
@@ -33,5 +42,10 @@ public class Calc {
             }
         }
         return result;
+    }
+
+    private int parseWithSpecialDelimiter(int result, String expression, String delimiter) {
+        String[] entries = expression.split(delimiter);
+        return parse(result, entries);
     }
 }
