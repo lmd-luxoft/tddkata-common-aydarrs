@@ -84,4 +84,44 @@ public class CalcTest {
         int expected = -1;
         assertEquals(expected, actual);
     }
+
+    /**
+     * Проверка на корректную сумму из выражения, содержащего перевод строки
+     */
+    @Test
+    public void testWithNewLineSum() {
+        int actual = calc.sum("1\n2,3");
+        int expected = 6;
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Проверка на выполнение, содержащего некоректный перевод строки с запятой после
+     */
+    @Test
+    public void testFailWithNewLineAndComaSum() {
+        int actual = calc.sum("1\n,2,3");
+        int expected = -1;
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Проверка на выполнение, содержащего некоректный перевод строки с запятой до
+     */
+    @Test
+    public void testFailWithComaAndNewLineSum() {
+        int actual = calc.sum("1,\n2,3");
+        int expected = -1;
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Проверка на выполнение, содержащего некоректный перевод строки с запятой до и после
+     */
+    @Test
+    public void testFailWithComaAndNewLineAndComaSum() {
+        int actual = calc.sum("1,\n,2,3");
+        int expected = -1;
+        assertEquals(expected, actual);
+    }
 }
