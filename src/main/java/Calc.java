@@ -13,9 +13,10 @@ public class Calc {
 
         int result = 0;
         try {
-            String firstSymbol = String.valueOf(expression.charAt(0));
-            if (firstSymbol != null && !firstSymbol.matches("\\d+")) {
-                return parseWithSpecialDelimiter(result, expression.substring(2), firstSymbol);
+
+            if (expression.startsWith("//")) {
+                String delimiter = String.valueOf(expression.charAt(2));
+                return parseWithSpecialDelimiter(result, expression.substring(4), delimiter);
 
             } else {
                 if (expression.contains(",\n") || expression.contains("\n,")) {

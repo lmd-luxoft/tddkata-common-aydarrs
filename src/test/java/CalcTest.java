@@ -130,7 +130,7 @@ public class CalcTest {
      */
     @Test
     public void testWithSpecifiedDelimeterAndComaSum() {
-        int actual = calc.sum(";\n1;2;3");
+        int actual = calc.sum("//;\n1;2;3");
         int expected = 6;
         assertEquals(expected, actual);
     }
@@ -140,7 +140,7 @@ public class CalcTest {
      */
     @Test
     public void testFailWithSpecifiedDelimeterAndComaSum() {
-        int actual = calc.sum(";\n1;,2;б3");
+        int actual = calc.sum("//;\n1;,2;б3");
         int expected = -1;
         assertEquals(expected, actual);
     }
@@ -150,7 +150,7 @@ public class CalcTest {
      */
     @Test
     public void testFailWithEmptySpecifiedDelimeterAndComaSum() {
-        int actual = calc.sum("\n1,2,3");
+        int actual = calc.sum("//\n1,2,3");
         int expected = -1;
         assertEquals(expected, actual);
     }
