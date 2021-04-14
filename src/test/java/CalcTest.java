@@ -1,6 +1,9 @@
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.util.Random;
+import java.util.StringJoiner;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -16,6 +19,9 @@ public class CalcTest {
         calc = new Calc();
     }
 
+    /**
+     * Проверка на пустую строку
+     */
     @Test
     public void testEmptyStringSum() {
         int actual = calc.sum("");
@@ -23,6 +29,9 @@ public class CalcTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Проверка со строкой в виде одного числа
+     */
     @Test
     public void testSingleNumberStringSum() {
         int actual = calc.sum("1");
@@ -30,13 +39,25 @@ public class CalcTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Проверка на строку из нескольких чисел (в данном случае сто единиц, для удобства проверки).
+     */
     @Test
-    public void testTwoNumbersSum() {
-        int actual = calc.sum("1,2");
-        int expected = 3;
-        assertEquals(expected, actual);
+    public void testSeveralNumbersSum() {
+        Random randomizer = new Random();
+        StringJoiner joiner = new StringJoiner("");
+        int numbersCount = randomizer.nextInt(100);
+        for (int i = 0; i < numbersCount; i++) {
+            joiner.add("1,");
+        }
+
+        int actual = calc.sum(joiner.toString());
+        assertEquals(numbersCount, actual);
     }
 
+    /**
+     * Проверка на строку, содержащую отрицательное число
+     */
     @Test
     public void testFailNegativeNumberSum() {
         int actual = calc.sum("-3,2");
@@ -44,13 +65,19 @@ public class CalcTest {
         assertEquals(expected, actual);
     }
 
+    /**
+     * Проверка на строку, содержащую нечисловые данные
+     */
     @Test
     public void testFailNotNumberSum() {
-        int actual = calc.sum("It's a trap!,2");
+        int actual = calc.sum("It's a trap!,2, 6");
         int expected = -1;
         assertEquals(expected, actual);
     }
 
+    /**
+     * Проверка на null
+     */
     @Test
     public void testFailNullSum() {
         int actual = calc.sum(null);
