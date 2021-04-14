@@ -124,4 +124,34 @@ public class CalcTest {
         int expected = -1;
         assertEquals(expected, actual);
     }
+
+    /**
+     * Проверка на выполнение, с заданным разделителем
+     */
+    @Test
+    public void testWithSpecifiedDelimeterAndComaSum() {
+        int actual = calc.sum(";\n1;2;3");
+        int expected = 6;
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Проверка на выполнение, с заданным разделителем и намереной ошибкой ввода
+     */
+    @Test
+    public void testFailWithSpecifiedDelimeterAndComaSum() {
+        int actual = calc.sum(";\n1;,2;б3");
+        int expected = -1;
+        assertEquals(expected, actual);
+    }
+
+    /**
+     * Проверка на выполнение, с пустым разделителем
+     */
+    @Test
+    public void testFailWithEmptySpecifiedDelimeterAndComaSum() {
+        int actual = calc.sum("\n1;,2;б3");
+        int expected = -1;
+        assertEquals(expected, actual);
+    }
 }
